@@ -48,8 +48,7 @@ double SensorCode_SampleCode()
 
 	res = Walabot_GetStatus(&appStatus, &calibrationProcess);
 	if (res != 0) {
-		cout << "this is the status of walabot" << res << '\n';
-
+	
 		res = Walabot_SetSettingsFolder("C:/ProgramData/Walabot/WalabotSDK");
 		//CHECK_WALABOT_RESULT(res, "Walabot_SetSettingsFolder");
 
@@ -69,20 +68,20 @@ double SensorCode_SampleCode()
 	}
 		
 	res = Walabot_GetStatus(&appStatus, &calibrationProcess);
-	cout << "this is the status of walabot" << res << '\n';
 	//CHECK_WALABOT_RESULT(res, "Walabot_GetStatus");
 
 	res = Walabot_Trigger();
 	//CHECK_WALABOT_RESULT(res, "Walabot_Trigger");
 
 	Walabot_GetSignal(1, 4, &signal, &timeAxis, &numSamples);
-	res = Walabot_Stop();
-	//CHECK_WALABOT_RESULT(res, "Walabot_Stop");
-
+	
+	
 	return *signal;
 }
 
 void disconnect() {
+	res = Walabot_Stop();
+	//CHECK_WALABOT_RESULT(res, "Walabot_Stop");
 	res = Walabot_Disconnect();
 	//CHECK_WALABOT_RESULT(res, "Walabot_Disconnect");
 }

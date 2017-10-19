@@ -101,10 +101,9 @@ int __cdecl tcp_server(void)
 
 		iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
 		if (iResult > 0) {
-			printf("Bytes received: %d\n", iResult);
+
 
 			double result = SensorCode_SampleCode();
-			std::cout << sizeof(double);
 			// Echo the buffer back to the sender
 			iSendResult = send(ClientSocket, (char*)&result, sizeof(double), 0);
 			if (iSendResult == SOCKET_ERROR) {
@@ -113,7 +112,7 @@ int __cdecl tcp_server(void)
 				WSACleanup();
 				return 1;
 			}
-			printf("Bytes sent: %d\n", iSendResult);
+	
 		}
 		else if (iResult == 0)
 			printf("Connection closing...\n");

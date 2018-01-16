@@ -103,9 +103,12 @@ int __cdecl tcp_server(void)
 		if (iResult > 0) {
 
 
-			double result = SensorCode_SampleCode();
+			double* signals = SensorCode_SampleCode();
+			int sampleNumber = signals[0];
 			// Echo the buffer back to the sender
-			iSendResult = send(ClientSocket, (char*)&result, sizeof(double), 0);
+			iSendResult = send(ClientSocket, (char*)(signals+1), sampleNumber*8, 0);
+			
+				
 			if (iSendResult == SOCKET_ERROR) {
 				printf("send failed with error: %d\n", WSAGetLastError());
 				closesocket(ClientSocket);
@@ -137,6 +140,5 @@ int __cdecl tcp_server(void)
 	// cleanup
 	closesocket(ClientSocket);
 	WSACleanup();
-	system("pause");
 	return 0;
 }

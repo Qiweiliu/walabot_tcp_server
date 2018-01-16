@@ -3,6 +3,10 @@
           1 file(s) copied.
           1 file(s) copied.
           1 file(s) copied.
+  tcp_server.cpp
+c:\users\qiwei liu\desktop\sensor_samplecode_cpp\tcp_server.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SensorSampleCode.cpp
+  main.cpp
+  Generating Code...
   Sensor_SampleCode_cpp.vcxproj -> C:\Users\Qiwei Liu\Desktop\Sensor_SampleCode_cpp\Debug\Win32\Sensor_SampleCode_cpp.exe
   Sensor_SampleCode_cpp.vcxproj -> C:\Users\Qiwei Liu\Desktop\Sensor_SampleCode_cpp\Debug\Win32\Sensor_SampleCode_cpp.pdb (Full PDB)

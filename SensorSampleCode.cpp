@@ -36,7 +36,7 @@ double* signal;
 double* timeAxis;
 int numSamples;
 
-double SensorCode_SampleCode()
+double* SensorCode_SampleCode()
 {
 	// --------------------
 	// Variable definitions
@@ -55,15 +55,19 @@ double SensorCode_SampleCode()
 		res = Walabot_ConnectAny();
 		//CHECK_WALABOT_RESULT(res, "Walabot_ConnectAny");
 
-		res = Walabot_SetProfile(PROF_SENSOR_NARROW);
+		res = Walabot_SetProfile(PROF_SENSOR);
 		//CHECK_WALABOT_RESULT(res, "Walabot_SetProfile");
 
 		int numPairs = 0;
 		AntennaPair* AntennaPair;
 		res = Walabot_GetAntennaPairs(&AntennaPair, &numPairs);
 		//CHECK_WALABOT_RESULT(res, "Walabot_GetAntennaPairs");
+		double start = 0;
+		double end = 0;
+		double ress = 0;
+		Walabot_GetArenaR(&start, &end, &ress);
 
-		res = Walabot_Start();
+		Walabot_Start();
 		//CHECK_WALABOT_RESULT(res, "Walabot_Start");
 	}
 		
@@ -73,10 +77,14 @@ double SensorCode_SampleCode()
 	res = Walabot_Trigger();
 	//CHECK_WALABOT_RESULT(res, "Walabot_Trigger");
 
-	Walabot_GetSignal(1, 4, &signal, &timeAxis, &numSamples);
-	
-	
-	return *signal;
+	Walabot_GetSignal(1, 18, &signal, &timeAxis, &numSamples);
+
+	double* signals = new double[numSamples+1];
+	signals[0] = numSamples;
+	for (int i = 1; i < numSamples+1; i++) {
+		signals[i] = signal[i];
+	}	
+		return signals;
 }
 
 void disconnect() {
